@@ -34,8 +34,8 @@ detected_frameworks:
   - Node.js
   - JavaScript
   - TypeScript
-  - npm
-turbo_cat_intelligence: 380
+turbo_cat_intelligence: 235
 stats:
-  last_auto_time: 0.2
-  times_run: 3
+  last_auto_time: 0.4
+  times_run: 4
+  best_auto_time: 0.4

@@ -1,22 +1,38 @@
 # faf-clawdbot
 
+[![npm version](https://img.shields.io/npm/v/faf-clawdbot.svg)](https://www.npmjs.com/package/faf-clawdbot)
+[![license](https://img.shields.io/npm/l/faf-clawdbot.svg)](https://opensource.org/licenses/MIT)
+
 **Universal AI context for ClawdBot.**
 
-Bridge ClawdBot to the universal AI context layer using [FAF](https://faf.one) (IANA: `application/vnd.faf+yaml`).
+[ClawdBot](https://github.com/clawdbot/clawdbot) (58k+ stars) is a powerful self-hosted AI assistant. It uses `SOUL.md` for personality—but that file is trapped in one workspace. **faf-clawdbot sets it free.**
 
-One `project.faf` → works everywhere:
+Your soul becomes **persistent** and **eternal**—never re-explain yourself to AI again.
+
+## The Problem
+
+Your ClawdBot personality lives in `~/clawd/SOUL.md`. But what about:
+- Your Claude Desktop setup?
+- Your Cursor workspace?
+- Your VS Code projects?
+- Your team's shared configuration?
+
+You end up maintaining multiple files that drift apart.
+
+## The Solution
+
+One `project.faf` file. Renders everywhere.
 
 ```
-project.faf (universal)
-    │
-    ├──→ ClawdBot (SOUL.md)
-    ├──→ Claude Desktop (native)
-    ├──→ Cursor (native)
-    ├──→ VS Code (native)
-    └──→ Any MCP-compatible tool
+project.faf (single source of truth)
+       │
+       ├──→ SOUL.md     (ClawdBot)
+       ├──→ CLAUDE.md   (Claude Code)
+       ├──→ .cursorrules (Cursor)
+       └──→ Any MCP-compatible tool
 ```
 
-**Edit once. Context everywhere.**
+**Edit once. Context everywhere. Eternal.**
 
 ## Install
 
@@ -27,11 +43,13 @@ npm install -g faf-clawdbot
 ## Quick Start
 
 ```bash
-# Create project.faf in your ClawdBot workspace
+# Navigate to your ClawdBot workspace
 cd ~/clawd
+
+# Create a universal context file
 faf-clawdbot init "my-assistant"
 
-# Edit your context
+# Edit your context (one file, all platforms)
 nano project.faf
 
 # Generate SOUL.md for ClawdBot
@@ -42,17 +60,17 @@ faf-clawdbot sync
 
 | Command | Description |
 |---------|-------------|
-| `init [name]` | Create `project.faf` in workspace |
+| `init [name]` | Create `project.faf` in current directory |
 | `sync` | Generate `SOUL.md` from `project.faf` |
 | `watch` | Auto-sync on file changes |
-| `status` | Show current FAF/SOUL status |
+| `status` | Show sync status |
 
-## Example project.faf
+## Example Configuration
 
 ```yaml
 project:
   name: "my-assistant"
-  goal: "Personal AI across all platforms"
+  goal: "Personal AI that works across all my tools"
 
 persona:
   tone: "Direct, helpful, no fluff"
@@ -60,12 +78,13 @@ persona:
   traits:
     - "Concise responses"
     - "Proactive suggestions"
+    - "Code examples when relevant"
 
 context:
   owner: "James"
   preferences:
     - "No emojis unless asked"
-    - "Code examples when relevant"
+    - "Explain reasoning briefly"
 
 stack:
   model: "claude-opus-4-5"
@@ -76,60 +95,63 @@ stack:
 
 ## Why Universal?
 
-| SOUL.md (ClawdBot only) | project.faf (Universal) |
-|-------------------------|-------------------------|
+| SOUL.md | project.faf |
+|---------|-------------|
+| ClawdBot only | Works everywhere |
 | Freeform markdown | Structured YAML |
-| Trapped in one tool | Works everywhere |
-| Local file | Cloud-syncable (MCPaaS) |
+| One workspace | Portable across tools |
 | Custom format | IANA-registered standard |
+| Manual sync | Automated rendering |
 
 ## One Soul, Many Renderings
 
 ```
-              ┌─────────────────┐
-              │   project.faf   │  ← Single source of truth
-              │  (your soul)    │  ← IANA-registered
-              └────────┬────────┘
-                       │
-                 RENDERED ON-DEMAND
-                       │
-         ┌─────────────┼─────────────┐
-         ▼             ▼             ▼
-    ┌─────────┐  ┌──────────┐  ┌──────────┐
-    │ SOUL.md │  │CLAUDE.md │  │GEMINI.md │
-    │ClawdBot │  │Claude    │  │Gemini    │
-    └─────────┘  └──────────┘  └──────────┘
+                ┌─────────────────┐
+                │   project.faf   │  ← Your single source of truth
+                │   (your soul)   │  ← IANA: application/vnd.faf+yaml
+                └────────┬────────┘
+                         │
+                   RENDER ENGINE
+                         │
+       ┌─────────────────┼─────────────────┐
+       ▼                 ▼                 ▼
+  ┌─────────┐      ┌──────────┐      ┌──────────┐
+  │ SOUL.md │      │CLAUDE.md │      │GEMINI.md │
+  │ClawdBot │      │  Claude  │      │  Gemini  │
+  │ 58k ★   │      │Anthropic │      │  Google  │
+  └─────────┘      └──────────┘      └──────────┘
 ```
 
-**Edit `project.faf` once → regenerate for any tool.**
+Same soul. Same personality. Every tool. **Persistent. Eternal. Zero drift.**
 
-- `faf-clawdbot sync` → renders SOUL.md
-- `faf bi-sync` → renders CLAUDE.md
-- Same soul. Zero drift. Universal.
-
-## The Universal Layer
+## How It Fits
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                 UNIVERSAL AI CONTEXT                        │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   project.faf sits between package.json and README.md       │
-│                                                             │
-│   package.json    ← npm's context                           │
-│   project.faf     ← AI's context (IANA-registered)          │
-│   README.md       ← human's context                         │
-│                                                             │
-│   ONE FORMAT → EVERY AI TOOL                                │
-└─────────────────────────────────────────────────────────────┘
+Your project directory:
+├── package.json     ← npm's context
+├── project.faf      ← AI's context (universal)
+├── README.md        ← Human's context
+└── SOUL.md          ← Generated for ClawdBot
 ```
+
+The `.faf` file sits naturally alongside `package.json`—one for npm, one for AI.
+
+## Related Tools
+
+| Tool | Command | Output |
+|------|---------|--------|
+| **faf-clawdbot** | `faf-clawdbot sync` | `SOUL.md` |
+| **faf-cli** | `faf bi-sync` | `CLAUDE.md` |
+| **faf-cursor** | `faf-cursor sync` | `.cursorrules` |
+
+All read the same `project.faf`. All stay in sync.
 
 ## Links
 
-- **FAF Spec**: https://faf.one
-- **IANA Registration**: `application/vnd.faf+yaml`
-- **faf-cli**: https://www.npmjs.com/package/faf-cli
-- **ClawdBot**: https://github.com/clawdbot/clawdbot
+- [FAF Specification](https://faf.one) — The universal format
+- [IANA Registration](https://www.iana.org/assignments/media-types/application/vnd.faf+yaml) — `application/vnd.faf+yaml`
+- [faf-cli](https://www.npmjs.com/package/faf-cli) — Core CLI tool
+- [ClawdBot](https://github.com/clawdbot/clawdbot) — The AI assistant
 
 ## License
 
@@ -137,4 +159,4 @@ MIT
 
 ---
 
-*Built by [Wolfe-Jam](https://wolfejam.dev) | Powered by [FAF](https://faf.one)*
+Built by [Wolfe-Jam](https://wolfejam.dev) | Powered by [FAF](https://faf.one)
