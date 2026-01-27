@@ -1,10 +1,22 @@
 # faf-clawdbot
 
-**Portable souls for ClawdBot.**
+**Universal AI context for ClawdBot.**
 
-Transform ClawdBot's `SOUL.md` into a structured, portable format using [FAF](https://faf.one) (IANA: `application/vnd.faf+yaml`).
+Bridge ClawdBot to the universal AI context layer using [FAF](https://faf.one) (IANA: `application/vnd.faf+yaml`).
 
-Your soul works everywhere - ClawdBot, Claude Desktop, Cursor, VS Code, any MCP-compatible tool.
+One `project.faf` → works everywhere:
+
+```
+project.faf (universal)
+    │
+    ├──→ ClawdBot (SOUL.md)
+    ├──→ Claude Desktop (native)
+    ├──→ Cursor (native)
+    ├──→ VS Code (native)
+    └──→ Any MCP-compatible tool
+```
+
+**Edit once. Context everywhere.**
 
 ## Install
 
@@ -19,10 +31,10 @@ npm install -g faf-clawdbot
 cd ~/clawd
 faf-clawdbot init "my-assistant"
 
-# Edit your soul
+# Edit your context
 nano project.faf
 
-# Generate SOUL.md
+# Generate SOUL.md for ClawdBot
 faf-clawdbot sync
 ```
 
@@ -43,7 +55,7 @@ project:
   goal: "Personal AI across all platforms"
 
 persona:
-  voice: "Direct, helpful, no fluff"
+  tone: "Direct, helpful, no fluff"
   style: "Senior engineer"
   traits:
     - "Concise responses"
@@ -62,25 +74,31 @@ stack:
     - "slack"
 ```
 
-## Why FAF?
+## Why Universal?
 
-| SOUL.md | project.faf |
-|---------|-------------|
+| SOUL.md (ClawdBot only) | project.faf (Universal) |
+|-------------------------|-------------------------|
 | Freeform markdown | Structured YAML |
-| ClawdBot only | Works everywhere |
+| Trapped in one tool | Works everywhere |
 | Local file | Cloud-syncable (MCPaaS) |
 | Custom format | IANA-registered standard |
 
-## Portability
+## The Universal Layer
 
-Same `project.faf` works with:
-- ClawdBot (via this tool)
-- Claude Desktop (native)
-- Cursor
-- VS Code
-- Any MCP-compatible tool
-
-Edit once. Soul everywhere.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 UNIVERSAL AI CONTEXT                        │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│   project.faf sits between package.json and README.md       │
+│                                                             │
+│   package.json    ← npm's context                           │
+│   project.faf     ← AI's context (IANA-registered)          │
+│   README.md       ← human's context                         │
+│                                                             │
+│   ONE FORMAT → EVERY AI TOOL                                │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ## Links
 
