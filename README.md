@@ -83,6 +83,30 @@ stack:
 | Local file | Cloud-syncable (MCPaaS) |
 | Custom format | IANA-registered standard |
 
+## One Soul, Many Renderings
+
+```
+              ┌─────────────────┐
+              │   project.faf   │  ← Single source of truth
+              │  (your soul)    │  ← IANA-registered
+              └────────┬────────┘
+                       │
+                 RENDERED ON-DEMAND
+                       │
+         ┌─────────────┼─────────────┐
+         ▼             ▼             ▼
+    ┌─────────┐  ┌──────────┐  ┌──────────┐
+    │ SOUL.md │  │CLAUDE.md │  │GEMINI.md │
+    │ClawdBot │  │Claude    │  │Gemini    │
+    └─────────┘  └──────────┘  └──────────┘
+```
+
+**Edit `project.faf` once → regenerate for any tool.**
+
+- `faf-clawdbot sync` → renders SOUL.md
+- `faf bi-sync` → renders CLAUDE.md
+- Same soul. Zero drift. Universal.
+
 ## The Universal Layer
 
 ```
